@@ -17,4 +17,8 @@ typedef struct Port {
 
 int Port_Init(const EPORT_ID id, PPORT port, unsigned short bits, int output);
 
+int Port_Read(const PPORT port);
+
+void Port_Write(const PPORT port, int val);
+
 #endif

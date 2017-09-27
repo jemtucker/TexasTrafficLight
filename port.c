@@ -4,7 +4,7 @@
 
 #include "utils.h"
 
-int PortA_Init(PPORT port, unsigned short bit, int output) {
+static int PortA_Init(PPORT port, unsigned short bit, int output) {
 	volatile unsigned long delay;
 	
 	port->address = &GPIO_PORTA_DATA_R;
@@ -29,7 +29,7 @@ int PortA_Init(PPORT port, unsigned short bit, int output) {
 	return TRUE;
 }
 
-int PortB_Init(PPORT port, unsigned short bit, int output) {
+static int PortB_Init(PPORT port, unsigned short bit, int output) {
 	volatile unsigned long delay;
 	
 	port->address = &GPIO_PORTB_DATA_R;
@@ -54,7 +54,7 @@ int PortB_Init(PPORT port, unsigned short bit, int output) {
 	return TRUE;
 }
 
-int PortC_Init(PPORT port, unsigned short bit, int output) {
+static int PortC_Init(PPORT port, unsigned short bit, int output) {
 	volatile unsigned long delay;
 	
 	port->address = &GPIO_PORTC_DATA_R;
@@ -79,7 +79,7 @@ int PortC_Init(PPORT port, unsigned short bit, int output) {
 	return TRUE;
 }
 
-int PortD_Init(PPORT port, unsigned short bit, int output) {
+static int PortD_Init(PPORT port, unsigned short bit, int output) {
 	volatile unsigned long delay;
 	
 	port->address = &GPIO_PORTD_DATA_R;
@@ -104,7 +104,7 @@ int PortD_Init(PPORT port, unsigned short bit, int output) {
 	return TRUE;
 }
 
-int PortE_Init(PPORT port, unsigned short bit, int output) {
+static int PortE_Init(PPORT port, unsigned short bit, int output) {
 	volatile unsigned long delay;
 	
 	port->address = &GPIO_PORTE_DATA_R;
@@ -129,7 +129,7 @@ int PortE_Init(PPORT port, unsigned short bit, int output) {
 	return TRUE;
 }
 
-int PortF_Init(PPORT port, unsigned short bit, int output) {
+static int PortF_Init(PPORT port, unsigned short bit, int output) {
 	volatile unsigned long delay;
 	
 	port->address = &GPIO_PORTF_DATA_R;
@@ -174,4 +174,12 @@ int Port_Init(const EPORT_ID id, PPORT port, unsigned short bit, int output) {
 		default:
 			return FALSE;
 	}
+}
+
+int Port_Read(const PPORT port) {
+	return (*port->address) & port->mask;
+}
+
+void Port_Write(const PPORT port, int val) {
+	(*port->address) = val & port->mask;
 }
